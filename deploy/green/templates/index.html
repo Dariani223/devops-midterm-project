@@ -1,0 +1,67 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask ToDo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 70%;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .delete-link {
+            margin-left: 10px;
+            color: #f44336;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo List</h1>
+
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="Add a new task..." required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Current Tasks:</h2>
+    {% if tasks %}
+        <ul>
+            {% for task in tasks %}
+                <li>
+                    {{ task }}
+                    <a href="/delete/{{ loop.index0 }}" class="delete-link">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tasks yet. Add some tasks above!</p>
+    {% endif %}
+</body>
+</html>
